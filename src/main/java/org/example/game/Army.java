@@ -6,6 +6,15 @@ import java.util.function.Supplier;
 
 public class Army implements Iterable<Warrior> {
 
+    public void removeDead() {
+        var it = iterator();
+        while (it.hasNext()) {
+            if (!it.next().isAlive()) {
+                it.remove();
+            }
+        }
+    }
+
     private class Node
             extends Warrior
             implements WarriorInArmy {
@@ -132,6 +141,7 @@ public class Army implements Iterable<Warrior> {
 
     private class SimpleIterator implements Iterator<Warrior> {
         Node cursor = head;
+        Node prev = null;
 
         @Override
         public boolean hasNext() {
@@ -143,8 +153,19 @@ public class Army implements Iterable<Warrior> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
+            prev = cursor;
             cursor = cursor.next;
-            return cursor;
+            return cursor.warrior;
+        }
+
+        @Override
+        public void remove() {
+            if (prev == null){
+                throw new IllegalStateException();
+            }
+            prev.next = cursor.next;
+            cursor = prev;
+            prev = null;
         }
     }
 

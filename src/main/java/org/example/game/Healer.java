@@ -13,6 +13,10 @@ public class Healer extends Warrior {
 /**
     Very important not to let warrior with Healer behind and full Hp waste his given healings during attacking without being wounded
     as it may cause same armies battling ending up in defending army win
+
+    Without if statement :
+    'allyWarrior.getHP() < allyWarrior.getInitialHP()'
+    the last test from HealerTests class is not green
  */
 
     @Override

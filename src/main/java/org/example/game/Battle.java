@@ -29,4 +29,21 @@ public class Battle {
         return it1.hasNext();
     }
 
+    public static boolean straightFight(Army army1, Army army2) {
+        while (true) {
+            var it1 = army1.iterator();
+            var it2 = army2.iterator();
+
+            if(!it1.hasNext()) { return false; }
+            if(!it2.hasNext()) { return true; }
+
+            while (it1.hasNext() && it2.hasNext()) {
+                fight(it1.next(), it2.next());
+            }
+
+            army1.removeDead();
+            army2.removeDead();
+        }
+    }
+
 }
