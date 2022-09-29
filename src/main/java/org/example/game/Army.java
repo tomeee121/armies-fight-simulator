@@ -50,19 +50,14 @@ public class Army implements Iterable<Warrior> {
         }
 
         public void healUnit(Warrior wounded) {
-            if(next != head) {
-                if(warrior instanceof Healer healer) {
-                    System.out.println("leczenie w heal unit method");
-                    healer.heal(wounded);
-                }
+
+//            if(next != head) {
+            if (warrior instanceof Healer healer) {
+                healer.heal(wounded);
+            }
+            if (next != head) {
                 next.healUnit(warrior);
             }
-        }
-
-        @Override
-        public void heal(CanReceiveDamage allyWarrior){
-            System.out.println("healing method in Army.Node ");
-            warrior.heal(allyWarrior);
         }
 
         @Override

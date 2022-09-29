@@ -5,17 +5,18 @@ interface HasAttack {
     int getAttack();
     default void hit(CanReceiveDamage opponent) {
         opponent.receiveDamage(this);
-        if (this instanceof WarriorInArmy warriorInArmy) {
-            System.out.println("w instancji warrior in army");
-            Warrior nextBehind = warriorInArmy.getNextBehind();
-            nextBehind.heal((CanReceiveDamage) this);
-        }
+//        if (this instanceof WarriorInArmy warriorInArmy) {
+//            System.out.println("w instancji warrior in army");
+//            Warrior nextBehind = warriorInArmy.getNextBehind();
+//            nextBehind.heal((CanReceiveDamage) this);
+//        }
     }
 }
 
 @FunctionalInterface
 interface HasHealth {
     int getHP();
+
     default boolean isAlive() {
         return getHP() > 0;
     };
@@ -24,6 +25,8 @@ interface HasHealth {
 interface CanReceiveDamage extends HasHealth {
     void receiveDamage(HasAttack damager);
     void setHP(int hp);
+    int getInitialHP();
+
     default void heal(CanReceiveDamage allyWarrior){};
 }
 
@@ -74,4 +77,8 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
         return ATTACK;
     }
 
+    @Override
+    public int getInitialHP() {
+        return initialHp;
+    }
 }
