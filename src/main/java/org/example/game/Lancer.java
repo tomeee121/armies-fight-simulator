@@ -1,14 +1,9 @@
 package org.example.game;
 
 public class Lancer extends Warrior implements KnowsDamageDealt {
-    private static final int ATTACK = 6;
-    private static final double SECOND_OPPONENT_HIT_RATION = 50;
+    private int attack = 6;
+    private double SECOND_OPPONENT_HIT_RATION = 50;
 
-
-    @Override
-    public int getAttack() {
-        return ATTACK;
-    }
 
     @Override
     public void hit(CanReceiveDamage opponent) {
@@ -20,6 +15,11 @@ public class Lancer extends Warrior implements KnowsDamageDealt {
                 theSecond.receiveDamage(() -> damageToTheSecond);
             }
         }
+    }
+
+    @Override
+    public int getAttack() {
+        return attack;
     }
 
 }

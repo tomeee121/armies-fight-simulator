@@ -6,15 +6,6 @@ import java.util.function.Supplier;
 
 public class Army implements Iterable<Warrior> {
 
-    public void removeDead() {
-        var it = iterator();
-        while (it.hasNext()) {
-            if (!it.next().isAlive()) {
-                it.remove();
-            }
-        }
-    }
-
     private class Node
             extends Warrior
             implements WarriorInArmy {
@@ -111,6 +102,29 @@ public class Army implements Iterable<Warrior> {
         return this;
     }
 
+    void removeDead() {
+        var it = iterator();
+        while (it.hasNext()) {
+            if (!it.next()
+                   .isAlive()) {
+                it.remove();
+            }
+        }
+    }
+
+    Army equipWarriorAtPosition(int position, Weapon weapon) {
+        Iterator<Warrior> equipIterator = iterator();
+        Warrior warriorToEquip = null;
+
+        for (int i = 0; i <= position; i++) {
+            warriorToEquip = equipIterator.next();
+        }
+
+        warriorToEquip.addWeaponToEquipment(weapon);
+        return this;
+    }
+
+
     @Override
     public Iterator<Warrior> iterator() {
         return new SimpleIterator();
@@ -160,7 +174,7 @@ public class Army implements Iterable<Warrior> {
 
         @Override
         public void remove() {
-            if (prev == null){
+            if (prev == null) {
                 throw new IllegalStateException();
             }
             prev.next = cursor.next;

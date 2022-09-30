@@ -1,15 +1,13 @@
 package org.example.game;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @FunctionalInterface
 interface HasAttack {
     int getAttack();
     default void hit(CanReceiveDamage opponent) {
         opponent.receiveDamage(this);
-//        if (this instanceof WarriorInArmy warriorInArmy) {
-//            System.out.println("w instancji warrior in army");
-//            Warrior nextBehind = warriorInArmy.getNextBehind();
-//            nextBehind.heal((CanReceiveDamage) this);
-//        }
     }
 }
 
@@ -33,7 +31,14 @@ interface CanReceiveDamage extends HasHealth {
 public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneable {
     private int hp = 50;
     private int initialHp;
-    private static final int ATTACK = 5;
+    private int attack = 5;
+    private List<Weapon> weaponsAvailable = new LinkedList<>();
+
+    void addWeaponToEquipment(Weapon weapon) {
+        this.hp = initialHp = getHP() + weapon.getHp();
+        this.attack = getAttack() + weapon.getAttack();
+        weaponsAvailable.add(weapon);
+    }
 
     public void hit(CanReceiveDamage opponent) {
         opponent.receiveDamage(this);
@@ -62,6 +67,11 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
         this.hp = initialHp = hp;
     }
 
+/**
+    No change to initial HP or attack after Warrior is equipped with weapons
+    Follow open-close principle
+ */
+
     @Override
     public int getHP() {
         return hp;
@@ -69,16 +79,21 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
 
     @Override
     public void setHP(int hp) {
-        this.hp = Math.min(hp, initialHp);
+        this.hp = hp;
     }
 
     @Override
     public int getAttack() {
-        return ATTACK;
+        return attack;
     }
+
 
     @Override
     public int getInitialHP() {
         return initialHp;
+    }
+
+    List<Weapon> getWeaponsAvailable() {
+        return weaponsAvailable;
     }
 }

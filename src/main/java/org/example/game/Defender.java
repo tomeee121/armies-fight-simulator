@@ -1,8 +1,8 @@
 package org.example.game;
 
 public class Defender extends Warrior {
-    private static final int ATTACK = 3;
-    private static final int DEFENSE = 2;
+    private int attack = 3;
+    private int defense = 2;
 
     protected Defender() {
         super(60);
@@ -14,12 +14,13 @@ public class Defender extends Warrior {
         super.receiveDamage(() -> finalDamage);
     }
 
+    @Override
     public int getAttack() {
-        return ATTACK;
+        return attack;
     }
 
     int getDefense() {
-        return DEFENSE;
+        return defense;
     }
 
 }

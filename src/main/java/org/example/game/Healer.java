@@ -2,8 +2,8 @@ package org.example.game;
 
 public class Healer extends Warrior {
 
-    private static final int HEALING_POWER = 2;
-    private static final int ATTACK = 0;
+    private int healingPower = 2;
+    private int attack = 0;
     private int allowedHealings = 100;
 
     protected Healer() {
@@ -23,7 +23,7 @@ public class Healer extends Warrior {
     public void heal(CanReceiveDamage allyWarrior) {
         if (allowedHealings > 0 && allyWarrior.getHP() < allyWarrior.getInitialHP()) {
             System.out.println("healing......... Being healed is " + allyWarrior.toString() + "   by   " + this.toString());
-            allyWarrior.setHP(allyWarrior.getHP() + HEALING_POWER);
+            allyWarrior.setHP(allyWarrior.getHP() + getHealingPower());
 
             decreaseAllowedHealings();
         }
@@ -40,7 +40,7 @@ public class Healer extends Warrior {
 
     @Override
     public int getAttack() {
-        return ATTACK;
+        return attack;
     }
 
     private void decreaseAllowedHealings() {
@@ -48,4 +48,9 @@ public class Healer extends Warrior {
             this.allowedHealings -= 1;
         }
     }
+
+    int getHealingPower() {
+        return healingPower;
+    }
+
 }
