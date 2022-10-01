@@ -29,14 +29,18 @@ interface CanReceiveDamage extends HasHealth {
 }
 
 public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneable {
-    private int hp = 50;
+    private int hp;
     private int initialHp;
     private int attack = 5;
     private List<Weapon> weaponsAvailable = new LinkedList<>();
 
-    void addWeaponToEquipment(Weapon weapon) {
-        this.hp = initialHp = getHP() + weapon.getHp();
-        this.attack = getAttack() + weapon.getAttack();
+    void equipWeapon(Weapon weapon) {
+        hp = initialHp = getHP() + weapon.getHp();
+        attack = getAttack() + weapon.getAttack();
+        addWeaponToList(weapon);
+    }
+
+    void addWeaponToList(Weapon weapon) {
         weaponsAvailable.add(weapon);
     }
 
@@ -79,7 +83,7 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
 
     @Override
     public void setHP(int hp) {
-        this.hp = hp;
+        this.hp = Math.min(initialHp, hp);
     }
 
     @Override
@@ -93,7 +97,4 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
         return initialHp;
     }
 
-    List<Weapon> getWeaponsAvailable() {
-        return weaponsAvailable;
-    }
 }

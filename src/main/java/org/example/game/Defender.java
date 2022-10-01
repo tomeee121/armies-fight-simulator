@@ -15,6 +15,14 @@ public class Defender extends Warrior {
     }
 
     @Override
+    void equipWeapon(Weapon weapon) {
+        this.setHP(getHP() + weapon.getHp());
+        this.attack = getAttack() + weapon.getAttack();
+        this.defense = getDefense() + weapon.getDefence();
+        addWeaponToList(weapon);
+    }
+
+    @Override
     public int getAttack() {
         return attack;
     }

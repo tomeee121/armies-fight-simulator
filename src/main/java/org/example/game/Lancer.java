@@ -1,5 +1,8 @@
 package org.example.game;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class Lancer extends Warrior implements KnowsDamageDealt {
     private int attack = 6;
     private double SECOND_OPPONENT_HIT_RATION = 50;
@@ -15,6 +18,13 @@ public class Lancer extends Warrior implements KnowsDamageDealt {
                 theSecond.receiveDamage(() -> damageToTheSecond);
             }
         }
+    }
+
+    @Override
+    void equipWeapon(Weapon weapon) {
+        this.setHP(getHP() + weapon.getHp());
+        this.attack = getAttack() + weapon.getAttack();
+        addWeaponToList(weapon);
     }
 
     @Override

@@ -10,7 +10,8 @@ public class Healer extends Warrior {
         super(60);
     }
 
-/**
+
+    /**
     Very important not to let warrior with Healer behind and full Hp waste his given healings during attacking without being wounded
     as it may cause same armies battling ending up in defending army win
 
@@ -21,12 +22,12 @@ public class Healer extends Warrior {
 
     @Override
     public void heal(CanReceiveDamage allyWarrior) {
-        if (allowedHealings > 0 && allyWarrior.getHP() < allyWarrior.getInitialHP()) {
-            System.out.println("healing......... Being healed is " + allyWarrior.toString() + "   by   " + this.toString());
-            allyWarrior.setHP(allyWarrior.getHP() + getHealingPower());
+            if (allowedHealings > 0 && allyWarrior.getHP() < allyWarrior.getInitialHP()) {
+                System.out.println("healing......... Being healed is " + allyWarrior.toString() + "   by   " + this.toString());
+                allyWarrior.setHP(allyWarrior.getHP() + getHealingPower());
 
-            decreaseAllowedHealings();
-        }
+                decreaseAllowedHealings();
+            }
     }
 
     /**
@@ -36,6 +37,14 @@ public class Healer extends Warrior {
     @Override
     public void hit(CanReceiveDamage opponent) {
         // just do nothing
+    }
+
+    @Override
+    void equipWeapon(Weapon weapon) {
+        this.setHP(getHP() + weapon.getHp());
+        this.attack = getAttack() + weapon.getAttack();
+        this.healingPower = getHealingPower() + weapon.getHealPower();
+        addWeaponToList(weapon);
     }
 
     @Override

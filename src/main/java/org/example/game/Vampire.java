@@ -9,7 +9,7 @@ public class Vampire extends Warrior implements KnowsDamageDealt {
         super(40);
     }
 
-/**
+    /**
     Use getter for vampirism to wrap additional properties from weapons equipped
 */
 
@@ -19,6 +19,14 @@ public class Vampire extends Warrior implements KnowsDamageDealt {
         final int percent = 100;
         int healMyselfBy = damageDealt * getVampirism() / percent;
         setHP(getHP() + healMyselfBy);
+    }
+
+    @Override
+    void equipWeapon(Weapon weapon) {
+        this.setHP(getHP() + weapon.getHp());
+        this.attack = getAttack() + weapon.getAttack();
+        this.vampirism = getVampirism() + weapon.getVampirism();
+        addWeaponToList(weapon);
     }
 
     @Override

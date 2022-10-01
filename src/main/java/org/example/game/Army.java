@@ -49,10 +49,14 @@ public class Army implements Iterable<Warrior> {
             next.healUnit(warrior);
         }
 
+        /**
+         * Healing referes to WarriorInArmy type object not single so implementation of base healing method was added in a place where nextBehind can be easily determined
+         * warrior object in healUnit() method is nextBehind because on this object the method is invoked
+         * Then pass it till object is equal head (no next Warrior)
+         */
         public void healUnit(Warrior wounded) {
 
-//            if(next != head) {
-            if (warrior instanceof Healer healer) {
+            if (warrior instanceof Healer healer && wounded != null) {
                 healer.heal(wounded);
             }
             if (next != head) {
@@ -63,6 +67,9 @@ public class Army implements Iterable<Warrior> {
         @Override
         protected Warrior clone() {
             return warrior.clone();
+        }
+
+        private Node() {
         }
     }
 
@@ -112,6 +119,11 @@ public class Army implements Iterable<Warrior> {
         }
     }
 
+    /**
+     * Move iterator to given position, pass weapon to add to given type of Warrior
+     * return Army for chaining
+     */
+
     Army equipWarriorAtPosition(int position, Weapon weapon) {
         Iterator<Warrior> equipIterator = iterator();
         Warrior warriorToEquip = null;
@@ -120,10 +132,9 @@ public class Army implements Iterable<Warrior> {
             warriorToEquip = equipIterator.next();
         }
 
-        warriorToEquip.addWeaponToEquipment(weapon);
+        warriorToEquip.equipWeapon(weapon);
         return this;
     }
-
 
     @Override
     public Iterator<Warrior> iterator() {
