@@ -86,7 +86,7 @@ public class EquipedWarriorsBattleTests {
     }
 
     @Test
-    @DisplayName("Softserve site smoke tests for equipped warrior/army")
+    @DisplayName("Softserve site smoke tests for equipped warrior/army - straight fight")
     void smokeTest() {
 
         var ogre = new Warrior();
@@ -140,10 +140,73 @@ public class EquipedWarriorsBattleTests {
         enemyArmy.equipWarriorAtPosition(0, katana);
         enemyArmy.equipWarriorAtPosition(1, wand);
 
-        boolean res = Battle.battle(myArmy, enemyArmy);
-        System.out.println(enemyArmy.firstAlive().next().getHP());
+        boolean res = Battle.straightFight(myArmy, enemyArmy);
 
         assertTrue(res);
+    }
+
+/**
+    Vampire heals himself after hit by 10 and healer behind heals him by 5. Lancer has 16 attack and Knight 12 so no real damage can be done
+    if it is normal battle not straight*/
+
+    @Test
+    @DisplayName("Softserve site smoke tests for equipped warrior/army - battle")
+    void smokeTest2() {
+
+        var ogre = new Warrior();
+        var lancelot = new Knight();
+        var richard = new Defender();
+        var eric = new Vampire();
+        var freelancer = new Lancer();
+        var priest = new Healer();
+
+
+        var sword = Sword();
+        var shield = Shield();
+        var axe = GreatAxe();
+        var katana = Katana();
+        var wand = MagicWand();
+        var superWeapon = Weapon.builder().hp(50).attack(10).defence(5).vampirism(150).healPower(8).build();
+
+        ogre.equipWeapon(sword);
+        ogre.equipWeapon(shield);
+        ogre.equipWeapon(superWeapon);
+        lancelot.equipWeapon(superWeapon);
+        richard.equipWeapon(shield);
+        eric.equipWeapon(superWeapon);
+        freelancer.equipWeapon(axe);
+        freelancer.equipWeapon(katana);
+        priest.equipWeapon(wand);
+        priest.equipWeapon(shield);
+
+        assertEquals(ogre.getHP(), 125);
+        assertEquals(lancelot.getAttack(), 17);
+        assertEquals(richard.getDefense(), 4);
+        assertEquals(eric.getVampirism(), 200);
+        assertEquals(freelancer.getHP(), 15);
+        assertEquals(priest.getHealingPower(), 5);
+
+        assertFalse(Battle.fight(ogre, eric));
+        assertFalse(Battle.fight(priest, richard));
+        assertTrue(Battle.fight(lancelot, freelancer));
+
+        var myArmy = new Army();
+        myArmy.addUnits(Knight::new, 1);
+        myArmy.addUnits(Lancer::new, 1);
+
+        var enemyArmy = new Army();
+        enemyArmy.addUnits(Vampire::new, 1);
+        enemyArmy.addUnits(Healer::new, 1);
+
+        myArmy.equipWarriorAtPosition(0, axe);
+        myArmy.equipWarriorAtPosition(1, superWeapon);
+
+        enemyArmy.equipWarriorAtPosition(0, katana);
+        enemyArmy.equipWarriorAtPosition(1, wand);
+
+        boolean res = Battle.battle(myArmy, enemyArmy);
+
+        assertFalse(res);
     }
 
     /**

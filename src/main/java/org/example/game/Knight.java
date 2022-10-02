@@ -9,7 +9,7 @@ public class Knight extends Warrior{
 
     @Override
     void equipWeapon(Weapon weapon) {
-        this.setHP(getHP() + weapon.getHp());
+        this.setInitialHp(getInitialHP() + weapon.getHp());
         this.attack = getAttack() + weapon.getAttack();
         addWeaponToList(weapon);
     }
