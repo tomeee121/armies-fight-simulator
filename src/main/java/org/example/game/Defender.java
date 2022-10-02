@@ -1,10 +1,10 @@
 package org.example.game;
 
 public class Defender extends Warrior {
-    private int attack = 3;
     private int defense = 2;
 
     protected Defender() {
+        super(3);
         setInitialHp(60);
     }
 
@@ -17,15 +17,11 @@ public class Defender extends Warrior {
     @Override
     void equipWeapon(Weapon weapon) {
         this.setInitialHp(getInitialHP() + weapon.getHp());
-        this.attack = getAttack() + weapon.getAttack();
+        this.setAttack(getAttack() + weapon.getAttack());
         this.defense = getDefense() + weapon.getDefence();
         addWeaponToList(weapon);
     }
 
-    @Override
-    public int getAttack() {
-        return attack;
-    }
 
     int getDefense() {
         return defense;

@@ -52,6 +52,7 @@ public class HealerTest {
         assertTrue(res12);
         boolean alive1 = freelancer.isAlive();
         assertTrue(alive1);
+        System.out.println(freelancer.getHP());
         assertTrue(freelancer.getHP() == 14);
         priest.heal(freelancer);
         assertTrue(freelancer.getHP() == 16);

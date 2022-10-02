@@ -3,10 +3,10 @@ package org.example.game;
 public class Vampire extends Warrior implements KnowsDamageDealt {
 
     private int vampirism = 50;
-    private int attack = 4;
 
     protected Vampire() {
-        setInitialHp(60);
+        super(4);
+        setInitialHp(40);
     }
 
     /**
@@ -24,14 +24,9 @@ public class Vampire extends Warrior implements KnowsDamageDealt {
     @Override
     void equipWeapon(Weapon weapon) {
         this.setInitialHp(getInitialHP() + weapon.getHp());
-        this.attack = getAttack() + weapon.getAttack();
+        this.setAttack(getAttack() + weapon.getAttack());
         this.vampirism = getVampirism() + weapon.getVampirism();
         addWeaponToList(weapon);
-    }
-
-    @Override
-    public int getAttack() {
-        return attack;
     }
 
     int getVampirism() {

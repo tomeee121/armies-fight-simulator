@@ -39,8 +39,6 @@ a
 1src/main/java/org/example/game/WarriorInArmy.java,4\4\441c228dfe4f5c984bdd9e62eecfbf2efc6614c3
 f
 6src/test/java/org/example/game/StraightFightTests.java,7\5\75a5bc22ad29a1d186518dab84adf4b08dbe8ed1
-^
-.src/test/java/org/example/game/HealerTest.java,0\d\0d641bc795e243dd0b3d56386a253d6a9ca305c2
 w
 G.idea/sonarlint/issuestore/3/f/3ff2ffad4182c5901bf244bebca93b64fa0e47b7,8\1\812ab58a1b9dc088d829ecae63cc07170c873bc3
 w
@@ -71,8 +69,6 @@ Z
 *src/main/java/org/example/game/Weapon.java,4\4\44855e607b3a3a330d989acd81b2d6c832f68ff8
 ^
 .src/test/java/org/example/game/BattleTest.java,4\0\4042c5fbf1fa54eef63f0b527940e86d48e116c8
-_
-/src/test/java/org/example/game/LancerTests.java,7\a\7aa2e2da38ebd79a05297c300d6bcdc7f32e0c1a
 w
 G.idea/sonarlint/issuestore/4/4/44855e607b3a3a330d989acd81b2d6c832f68ff8,8\5\8586687f1970770eb53ce2920e8fb66055d5636d
 w

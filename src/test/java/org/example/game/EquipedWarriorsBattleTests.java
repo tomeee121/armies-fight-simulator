@@ -146,8 +146,8 @@ public class EquipedWarriorsBattleTests {
     }
 
 /**
-    Vampire heals himself after hit by 10 and healer behind heals him by 5. Lancer has 16 attack and Knight 12 so no real damage can be done
-    if it is normal battle not straight*/
+    This time tested with battle (one behind one)
+ */
 
     @Test
     @DisplayName("Softserve site smoke tests for equipped warrior/army - battle")
@@ -206,7 +206,7 @@ public class EquipedWarriorsBattleTests {
 
         boolean res = Battle.battle(myArmy, enemyArmy);
 
-        assertFalse(res);
+        assertTrue(res);
     }
 
     /**

@@ -67,7 +67,11 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
         setInitialHp(50);
     }
 
-/**
+    protected Warrior(int attack) {
+        this.attack = attack;
+    }
+
+    /**
     No change to initial HP or attack after Warrior is equipped with weapons
     Follow open-close principle
  */
@@ -85,6 +89,10 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
     @Override
     public int getAttack() {
         return attack;
+    }
+
+    void setAttack(int attack) {
+        this.attack = attack;
     }
 
     @Override

@@ -2,11 +2,15 @@ package org.example.game;
 
 public class Healer extends Warrior {
 
+/**
+    No ATTACK variable since it is no longer final after weapons feature - using super keyword and super class constructor to set it
+*/
+
     private int healingPower = 2;
-    private int attack = 0;
     private int allowedHealings = 100;
 
     protected Healer() {
+        super(0);
         setInitialHp(60);
     }
 
@@ -42,15 +46,11 @@ public class Healer extends Warrior {
     @Override
     void equipWeapon(Weapon weapon) {
         this.setInitialHp(getInitialHP() + weapon.getHp());
-        this.attack = getAttack() + weapon.getAttack();
+        this.setAttack(getAttack() + weapon.getAttack());
         this.healingPower = getHealingPower() + weapon.getHealPower();
         addWeaponToList(weapon);
     }
 
-    @Override
-    public int getAttack() {
-        return attack;
-    }
 
     private void decreaseAllowedHealings() {
         if (allowedHealings > 0) {

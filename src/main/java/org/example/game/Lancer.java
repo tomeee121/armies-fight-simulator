@@ -1,12 +1,12 @@
 package org.example.game;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 public class Lancer extends Warrior implements KnowsDamageDealt {
-    private int attack = 6;
     private double SECOND_OPPONENT_HIT_RATION = 50;
 
+    protected Lancer() {
+        super(6);
+        setInitialHp(50);
+    }
 
     @Override
     public void hit(CanReceiveDamage opponent) {
@@ -23,13 +23,7 @@ public class Lancer extends Warrior implements KnowsDamageDealt {
     @Override
     void equipWeapon(Weapon weapon) {
         this.setInitialHp(getInitialHP() + weapon.getHp());
-        this.attack = getAttack() + weapon.getAttack();
+        setAttack(getAttack() + weapon.getAttack());
         addWeaponToList(weapon);
     }
-
-    @Override
-    public int getAttack() {
-        return attack;
-    }
-
 }
