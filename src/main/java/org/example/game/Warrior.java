@@ -35,8 +35,8 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
     private List<Weapon> weaponsAvailable = new LinkedList<>();
 
     void equipWeapon(Weapon weapon) {
-        hp = initialHp = getHP() + weapon.getHp();
-        attack = getAttack() + weapon.getAttack();
+        setInitialHp(getHP() + weapon.getHp());
+        this.attack = getAttack() + weapon.getAttack();
         addWeaponToList(weapon);
     }
 
@@ -64,11 +64,7 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
     }
 
     protected Warrior() {
-        this(50);
-    }
-
-    protected Warrior(int hp) {
-        this.hp = initialHp = hp;
+        setInitialHp(50);
     }
 
 /**
@@ -91,10 +87,12 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
         return attack;
     }
 
-
     @Override
     public int getInitialHP() {
         return initialHp;
     }
 
+    void setInitialHp(int initialHp) {
+        this.hp = this.initialHp = initialHp;
+    }
 }

@@ -7,7 +7,7 @@ public class Healer extends Warrior {
     private int allowedHealings = 100;
 
     protected Healer() {
-        super(60);
+        setInitialHp(60);
     }
 
 
@@ -41,7 +41,7 @@ public class Healer extends Warrior {
 
     @Override
     void equipWeapon(Weapon weapon) {
-        this.setHP(getHP() + weapon.getHp());
+        this.setInitialHp(getInitialHP() + weapon.getHp());
         this.attack = getAttack() + weapon.getAttack();
         this.healingPower = getHealingPower() + weapon.getHealPower();
         addWeaponToList(weapon);

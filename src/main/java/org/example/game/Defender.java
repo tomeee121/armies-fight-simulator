@@ -5,7 +5,7 @@ public class Defender extends Warrior {
     private int defense = 2;
 
     protected Defender() {
-        super(60);
+        setInitialHp(60);
     }
 
     @Override
@@ -16,7 +16,7 @@ public class Defender extends Warrior {
 
     @Override
     void equipWeapon(Weapon weapon) {
-        this.setHP(getHP() + weapon.getHp());
+        this.setInitialHp(getInitialHP() + weapon.getHp());
         this.attack = getAttack() + weapon.getAttack();
         this.defense = getDefense() + weapon.getDefence();
         addWeaponToList(weapon);

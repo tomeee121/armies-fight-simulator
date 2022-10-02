@@ -6,7 +6,7 @@ public class Vampire extends Warrior implements KnowsDamageDealt {
     private int attack = 4;
 
     protected Vampire() {
-        super(40);
+        setInitialHp(60);
     }
 
     /**
@@ -23,7 +23,7 @@ public class Vampire extends Warrior implements KnowsDamageDealt {
 
     @Override
     void equipWeapon(Weapon weapon) {
-        this.setHP(getHP() + weapon.getHp());
+        this.setInitialHp(getInitialHP() + weapon.getHp());
         this.attack = getAttack() + weapon.getAttack();
         this.vampirism = getVampirism() + weapon.getVampirism();
         addWeaponToList(weapon);
