@@ -89,8 +89,6 @@ w
 G.idea/sonarlint/issuestore/a/1/a15fea0afa6e36b84d8de76d2312e01a83273533,9\5\954c08292590bb81e03d5ae9f6c54af41cb45e5f
 f
 6src/main/java/org/example/fight/methods/StateTest.java,4\1\41e2f32b7f49dce8d050667d36222d2984e9c47d
-[
-+src/main/java/org/example/game/WeaponI.java,a\e\aec40b7add1344eee538273706fcf91e263c51be
 w
 G.idea/sonarlint/issuestore/e/7/e75338fce0c910d6242da704234a64d90f053cec,f\e\fe1281edbc3b34f7ea243b1e80789555558cc02f
 w
@@ -117,8 +115,6 @@ Z
 *src/main/java/org/example/game/Lancer.java,3\5\3548f3cb4851039caa09437145f61d39dae07645
 [
 +src/main/java/org/example/game/Vampire.java,6\5\65ec9605cafac060d68894c506558af34105fe6a
-n
->src/test/java/org/example/game/EquipedWarriorsBattleTests.java,2\3\234d747063e9a9f9c37ccdd88b7b5cad3b2bce1b
 Z
 *src/main/java/org/example/game/Healer.java,7\1\7192017e8d57ef57398049cfc2b66e3cd19020d1
 Z

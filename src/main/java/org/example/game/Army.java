@@ -231,6 +231,9 @@ public class Army implements Iterable<Warrior> {
                 }
             }
 
+/**
+            Important to create new instance of iterator since there is need to check all with different condition as it would start from last element other way
+*/
             if (!hasFoundLancer) {
                 var it2 = unSortedWarriors.iterator();
                 while (it2.hasNext()) {
@@ -282,8 +285,10 @@ public class Army implements Iterable<Warrior> {
                 }
             }
             if (hasWarlord()) {
-                while (it.hasNext()) {
-                    Warrior next = it.next();
+                var it2 = unSortedWarriors.iterator();
+
+                while (it2.hasNext()) {
+                    Warrior next = it2.next();
                     if (next instanceof Warlord) {
                         canAddAllTheRestList.add(next);
                     }
