@@ -1,8 +1,8 @@
 package org.example.game;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class Army implements Iterable<Warrior> {
 
@@ -75,6 +75,7 @@ public class Army implements Iterable<Warrior> {
 
     private Node head = new Node(null);
     private Node tail = head;
+    private boolean hasWarlord = false;
 
     private Warrior peek() {
         return head.next;
@@ -104,7 +105,19 @@ public class Army implements Iterable<Warrior> {
 
     public Army addUnits(Supplier<Warrior> factory, int amountToCreate) {
         for (int i = 0; i < amountToCreate; i++) {
-            addToTail(factory.get());
+            var supply = factory.get();
+
+            if (supply instanceof Warlord) {
+                if (!hasWarlord) {
+                    addToTail(supply);
+                    hasWarlord = true;
+                    continue;
+                } else {
+                    continue;
+                }
+            } else {
+                addToTail(supply);
+            }
         }
         return this;
     }
@@ -134,6 +147,154 @@ public class Army implements Iterable<Warrior> {
 
         warriorToEquip.equipWeapon(weapon);
         return this;
+    }
+
+
+    void moveUnits() {
+        var helpers = new HelpersForSelectingPosition();
+
+        if (hasWarlord) {
+
+            List<Warrior> unSortedWarriors = new LinkedList<>();
+
+            var iterator = iterator();
+            while (iterator.hasNext()) {
+                unSortedWarriors.add(iterator.next());
+            }
+
+            System.out.println("nie SORTED:");
+            for (Warrior unSortedWarrior : unSortedWarriors) {
+                System.out.println(unSortedWarrior + "<--- z unsorded list");
+            }
+            System.out.println(unSortedWarriors.size());
+            System.out.println("koniec NIE SORTED:");
+
+            List<Warrior> sortedWarriors = new LinkedList<>();
+
+            List<Warrior> firstPosition = helpers.canAddFirstLancer(unSortedWarriors);
+            for (Warrior warriorToRemove : firstPosition) {
+                unSortedWarriors.removeIf(o -> o.equals(warriorToRemove));
+            }
+
+
+            List<Warrior> healersFromSecond = helpers.canAddHealersFromSecondPlace(unSortedWarriors);
+            for (Warrior warriorToRemove : healersFromSecond) {
+                unSortedWarriors.removeIf(o -> o.equals(warriorToRemove));
+            }
+
+            List<Warrior> rest1 = helpers.canAddLancersInFrontIfThereIsNoHealer(unSortedWarriors);
+            for (Warrior warriorToRemove : rest1) {
+                unSortedWarriors.removeIf(o -> o.equals(warriorToRemove));
+            }
+
+            List<Warrior> rest2 = helpers.canAddAllTheRest(unSortedWarriors);
+
+            Stream.of(firstPosition, healersFromSecond, rest1, rest2)
+                  .flatMap(Collection::stream)
+                  .forEach(sortedWarriors::add); //flatMap to add elem. from a few lists
+
+
+/**
+ Now head can be reseted and we again add nodes from it (but based on an ordered list)
+ */
+
+            head = new Node(null);
+            tail = head;
+
+            for (Warrior sortedWarrior : sortedWarriors) {
+                System.out.println("sorted WARRIORS" + sortedWarrior);
+                addToTail(sortedWarrior);
+            }
+
+
+        }
+    }
+
+    /**
+     * Methods in the below class are helpers to find desired unit e.g. Lancer to fulfill first position of army, then Healers etc.
+     * They are invoked by moveUnits() method at the start of every battle's round
+     */
+
+    private class HelpersForSelectingPosition {
+        private List<Warrior> canAddFirstLancer(List<Warrior> unSortedWarriors) {
+            List<Warrior> canAddFirstLancerList = new LinkedList<Warrior>();
+            var it = unSortedWarriors.iterator();
+
+            boolean hasFoundLancer = false;
+
+            while (it.hasNext()) {
+                Warrior warrior = it.next();
+                if (warrior instanceof Lancer) {
+                    canAddFirstLancerList.add(warrior);
+                    hasFoundLancer = true;
+                    return canAddFirstLancerList;
+                }
+            }
+
+            if (!hasFoundLancer) {
+                var it2 = unSortedWarriors.iterator();
+                while (it2.hasNext()) {
+                    Warrior warrior2 = it2.next();
+                    if (!(warrior2 instanceof Warlord || warrior2 instanceof Healer)) {
+                        canAddFirstLancerList.add(warrior2);
+                        return canAddFirstLancerList;
+                    }
+                }
+
+            }
+            return canAddFirstLancerList;
+        }
+
+        private List<Warrior> canAddHealersFromSecondPlace(List<Warrior> unSortedWarriors) {
+            List<Warrior> canAddHealersFromSecondPlaceList = new LinkedList<Warrior>();
+            var it = unSortedWarriors.iterator();
+
+            while (it.hasNext()) {
+                Warrior next = it.next();
+                if (next instanceof Healer) {
+                    canAddHealersFromSecondPlaceList.add(next);
+                }
+            }
+            return canAddHealersFromSecondPlaceList;
+        }
+
+        private List<Warrior> canAddLancersInFrontIfThereIsNoHealer(List<Warrior> unSortedWarriors) {
+            List<Warrior> canAddLancersInFrontIfThereIsNoHealerList = new LinkedList<Warrior>();
+            var it = unSortedWarriors.iterator();
+
+            while (it.hasNext()) {
+                Warrior next = it.next();
+                if (next instanceof Lancer) {
+                    canAddLancersInFrontIfThereIsNoHealerList.add(next);
+                }
+            }
+            return canAddLancersInFrontIfThereIsNoHealerList;
+        }
+
+        private List<Warrior> canAddAllTheRest(List<Warrior> unSortedWarriors) {
+            List<Warrior> canAddAllTheRestList = new LinkedList<Warrior>();
+            var it = unSortedWarriors.iterator();
+
+            while (it.hasNext()) {
+                Warrior next = it.next();
+                if (!(next instanceof Warlord)) {
+                    canAddAllTheRestList.add(next);
+                }
+            }
+            if (hasWarlord()) {
+                while (it.hasNext()) {
+                    Warrior next = it.next();
+                    if (next instanceof Warlord) {
+                        canAddAllTheRestList.add(next);
+                    }
+                }
+            }
+            return canAddAllTheRestList;
+        }
+    }
+
+    boolean hasWarlord() {
+        return hasWarlord;
     }
 
     @Override
@@ -192,6 +353,17 @@ public class Army implements Iterable<Warrior> {
             cursor = prev;
             prev = null;
         }
+
+    }
+
+    protected int size() {
+        int size = 0;
+        var it = iterator();
+        while (it.hasNext()) {
+            Warrior next = it.next();
+            size++;
+        }
+        return size;
     }
 
 }

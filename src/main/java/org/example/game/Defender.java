@@ -22,7 +22,6 @@ public class Defender extends Warrior {
         addWeaponToList(weapon);
     }
 
-
     int getDefense() {
         return defense;
     }

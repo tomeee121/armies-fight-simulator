@@ -48,11 +48,11 @@ public class SmokeTestDefenders {
     @DisplayName("1. Battle - Defenders vs Warriors")
     void battle_01_defenders_warriors() {
         //given
-//        var myArmy = new Army();
-//        myArmy.addUnits(Defender::new, 1);
-//
-//        var enemyArmy = new Army();
-//        enemyArmy.addUnits(Warrior::new, 2);
+        var myArmy = new Army();
+        myArmy.addUnits(Defender::new, 1);
+
+        var enemyArmy = new Army();
+        enemyArmy.addUnits(Warrior::new, 2);
 
         var army3 = new Army();
         army3.addUnits(Warrior::new, 1);
@@ -63,8 +63,8 @@ public class SmokeTestDefenders {
 
         //when
         //then
-//        boolean res = Battle.battle(myArmy, enemyArmy);
-//        assertFalse(res);
+        boolean res = Battle.battle(myArmy, enemyArmy);
+        assertFalse(res);
         boolean res2 = Battle.battle(army3, army4);
         assertTrue(res2);
     }

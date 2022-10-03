@@ -11,6 +11,7 @@ public class Battle {
         do {
             numberOfRounds++;
             attacker.hit(defender);
+            System.out.println(attacker);
             if (defender.isAlive()) {
                 defender.hit(attacker);
             }
@@ -21,15 +22,19 @@ public class Battle {
     }
 
     public static boolean battle(Army army1, Army army2) {
+
         var it1 = army1.firstAlive();
         var it2 = army2.firstAlive();
         while (it1.hasNext() && it2.hasNext()) {
+            army1.moveUnits();
+            army2.moveUnits();
             fight(it1.next(), it2.next());
         }
         return it1.hasNext();
     }
 
     public static boolean straightFight(Army army1, Army army2) {
+
         while (true) {
             var it1 = army1.iterator();
             var it2 = army2.iterator();
@@ -38,6 +43,8 @@ public class Battle {
             if(!it2.hasNext()) { return true; }
 
             while (it1.hasNext() && it2.hasNext()) {
+                army1.moveUnits();
+                army2.moveUnits();
                 fight(it1.next(), it2.next());
             }
 
