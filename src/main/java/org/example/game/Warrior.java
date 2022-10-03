@@ -26,6 +26,8 @@ interface CanReceiveDamage extends HasHealth {
     int getInitialHP();
 
     default void heal(CanReceiveDamage allyWarrior){};
+    List<Weapon> getWeaponsAvailable();
+    void removeWeapons();
 }
 
 public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneable {
@@ -100,7 +102,18 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
         return initialHp;
     }
 
+    @Override
+    public List<Weapon> getWeaponsAvailable() {
+        return weaponsAvailable;
+    }
+
+    @Override
+    public void removeWeapons() {
+        weaponsAvailable.clear();
+    }
+
     void setInitialHp(int initialHp) {
         this.hp = this.initialHp = initialHp;
     }
+
 }

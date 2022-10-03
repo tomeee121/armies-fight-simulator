@@ -27,7 +27,7 @@ public class Healer extends Warrior {
     @Override
     public void heal(CanReceiveDamage allyWarrior) {
             if (allowedHealings > 0 && allyWarrior.getHP() < allyWarrior.getInitialHP()) {
-                System.out.println("healing......... Being healed is " + allyWarrior.toString() + "   by   " + this.toString());
+//                System.out.println("healing......... Being healed is " + allyWarrior.toString() + "   by   " + this.toString());
                 allyWarrior.setHP(allyWarrior.getHP() + getHealingPower());
 
                 decreaseAllowedHealings();

@@ -69,8 +69,6 @@ public class Army implements Iterable<Warrior> {
             return warrior.clone();
         }
 
-        private Node() {
-        }
     }
 
     private Node head = new Node(null);
@@ -113,7 +111,7 @@ public class Army implements Iterable<Warrior> {
                     hasWarlord = true;
                     continue;
                 } else {
-                    continue;
+                    break;
                 }
             } else {
                 addToTail(supply);
@@ -125,8 +123,7 @@ public class Army implements Iterable<Warrior> {
     void removeDead() {
         var it = iterator();
         while (it.hasNext()) {
-            if (!it.next()
-                   .isAlive()) {
+            if (!it.next().isAlive()) {
                 it.remove();
             }
         }
@@ -162,12 +159,12 @@ public class Army implements Iterable<Warrior> {
                 unSortedWarriors.add(iterator.next());
             }
 
-            System.out.println("nie SORTED:");
+//            System.out.println("nie SORTED:");
             for (Warrior unSortedWarrior : unSortedWarriors) {
-                System.out.println(unSortedWarrior + "<--- z unsorded list");
+//                System.out.println(unSortedWarrior + "<--- z unsorded list");
             }
-            System.out.println(unSortedWarriors.size());
-            System.out.println("koniec NIE SORTED:");
+//            System.out.println(unSortedWarriors.size());
+//            System.out.println("koniec NIE SORTED:");
 
             List<Warrior> sortedWarriors = new LinkedList<>();
 
@@ -198,16 +195,19 @@ public class Army implements Iterable<Warrior> {
  Now head can be reseted and we again add nodes from it (but based on an ordered list)
  */
 
-            head = new Node(null);
-            tail = head;
+            removeAllNodes();
 
             for (Warrior sortedWarrior : sortedWarriors) {
-                System.out.println("sorted WARRIORS" + sortedWarrior);
+//                System.out.println("sorted WARRIORS" + sortedWarrior);
                 addToTail(sortedWarrior);
             }
 
-
         }
+    }
+
+    private void removeAllNodes() {
+        head = new Node(null);
+        tail = head;
     }
 
     /**
@@ -217,7 +217,7 @@ public class Army implements Iterable<Warrior> {
 
     private class HelpersForSelectingPosition {
         private List<Warrior> canAddFirstLancer(List<Warrior> unSortedWarriors) {
-            List<Warrior> canAddFirstLancerList = new LinkedList<Warrior>();
+            List<Warrior> canAddFirstLancerList = new LinkedList<>();
             var it = unSortedWarriors.iterator();
 
             boolean hasFoundLancer = false;

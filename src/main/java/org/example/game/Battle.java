@@ -1,7 +1,5 @@
 package org.example.game;
 
-import java.util.Iterator;
-
 public class Battle {
 
     public static Integer numberOfRounds = 0;

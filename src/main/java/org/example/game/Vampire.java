@@ -9,10 +9,6 @@ public class Vampire extends Warrior implements KnowsDamageDealt {
         setInitialHp(40);
     }
 
-    /**
-    Use getter for vampirism to wrap additional properties from weapons equipped
-*/
-
     @Override
     public void hit(CanReceiveDamage opponent) {
         int damageDealt = hitAndReportDamage(opponent);
