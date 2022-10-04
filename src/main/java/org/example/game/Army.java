@@ -1,7 +1,7 @@
 package org.example.game;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Supplier;
@@ -240,6 +240,19 @@ public class Army implements Iterable<Warrior> {
             size++;
         }
         return size;
+    }
+
+    protected Iterable<Bombardier> getBombardiers() {
+        List<Bombardier> bombardiers = new ArrayList<>();
+        var iterator = iterator();
+        Warrior temp;
+        while (iterator.hasNext()) {
+            temp = iterator.next();
+            if (temp instanceof Bombardier) {
+                bombardiers.add((Bombardier) temp);
+            }
+        }
+        return bombardiers;
     }
 
 }

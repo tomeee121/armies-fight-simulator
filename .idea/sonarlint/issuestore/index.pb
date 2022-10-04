@@ -127,10 +127,6 @@ w
 G.idea/sonarlint/issuestore/0/e/0e7ba7c778498b21616bef4cafb1cebf73e6015d,3\3\3344e1f2d18cf4bd12bc06a6e4f7339ec2e02a1d
 [
 +src/main/java/org/example/game/WeaponI.java,a\e\aec40b7add1344eee538273706fcf91e263c51be
-Z
-*src/main/java/org/example/game/Lancer.java,3\5\3548f3cb4851039caa09437145f61d39dae07645
-d
-4src/main/java/org/example/game/KnowsDamageDealt.java,e\8\e8b54014ee6811c62a4575553243abc7f7b7dd47
 \
 ,src/main/java/org/example/game/Defender.java,7\7\771cdb002c395e03f4cf80c1d45be9c6491beb73
 e
@@ -165,11 +161,5 @@ w
 G.idea/sonarlint/issuestore/6/5/650f040bbcfd3f2bba535431b966a3319255f9c4,8\1\81b48e8279a54e710a018d8a61ccd5b53dfa222c
 w
 G.idea/sonarlint/issuestore/6/4/649d3fd9817a164d498709fbce25b0e4dd09b891,7\e\7e33a77b4490a004d7cd36ec29fa0942546c7c17
-Z
-*src/main/java/org/example/game/Battle.java,b\a\baa8c9582ccce7840b69658e61568701e45272b3
-[
-+src/main/java/org/example/game/Stealer.java,c\0\c0568e3066e38c84545fa9485e1fc29a3c0e7af9
 [
 +src/main/java/org/example/game/Vampire.java,6\5\65ec9605cafac060d68894c506558af34105fe6a
-[
-+src/main/java/org/example/game/Warrior.java,b\7\b7c8d3f166be71fb1abbaeb810db798b2b317a1a

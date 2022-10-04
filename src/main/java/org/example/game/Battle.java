@@ -20,12 +20,19 @@ public class Battle {
     }
 
     public static boolean battle(Army army1, Army army2) {
+        Iterable<Bombardier> bombardiers1 = army1.getBombardiers();
+        Iterable<Bombardier> bombardiers2 = army2.getBombardiers();
 
         var it1 = army1.firstAlive();
         var it2 = army2.firstAlive();
+
         while (it1.hasNext() && it2.hasNext()) {
+            bombardiers1.forEach(bombardier -> bombardier.bombard(it2));
+            bombardiers2.forEach(bombardier -> bombardier.bombard(it1));
+
             army1.moveUnits();
             army2.moveUnits();
+
             fight(it1.next(), it2.next());
         }
         return it1.hasNext();

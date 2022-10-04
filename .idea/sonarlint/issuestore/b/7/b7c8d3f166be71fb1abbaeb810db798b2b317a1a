@@ -1,14 +1,0 @@
-
-7
-java:S1116"Remove this empty statement.(ôŸìúÿÿÿÿ
-2
-java:S1116"Remove this empty statement.(º¸¼æ
-U
-java:S11611":Add the "@Override" annotation above this method signature(‹¨­ÿÿÿÿÿ
-i
-java:S2975;"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ü™£¨
-N	java:S106?"9Replace this use of System.out or System.err by a logger.(ÊÓ‡Í
-/
-java:S2225A"Return a non null object.(¥¹ï
-d
-java:S4275s"IRefactor this setter so that it actually refers to the field "initialHp".(¾†ŞŒûÿÿÿÿ
