@@ -151,7 +151,6 @@ public class Army implements Iterable<Warrior> {
     void moveUnits() {
 
         if (warlord != null) {
-            System.out.println("w move units");
             Iterable<Warrior> arrangedOrder = warlord.arrangePositions(iterator());
     /**
     Now head can be reseted and we again add nodes from it (but based on an ordered list)

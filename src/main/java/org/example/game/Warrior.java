@@ -6,6 +6,7 @@ import java.util.List;
 @FunctionalInterface
 interface HasAttack {
     int getAttack();
+
     default void hit(CanReceiveDamage opponent) {
         opponent.receiveDamage(this);
     }
@@ -17,16 +18,25 @@ interface HasHealth {
 
     default boolean isAlive() {
         return getHP() > 0;
-    };
+    }
+
+    ;
 }
 
 interface CanReceiveDamage extends HasHealth {
     void receiveDamage(HasAttack damager);
+
     void setHP(int hp);
+
     int getInitialHP();
 
-    default void heal(CanReceiveDamage allyWarrior){};
+    default void heal(CanReceiveDamage allyWarrior) {
+    }
+
+    ;
+
     List<Weapon> getWeaponsAvailable();
+
     void removeWeapons();
 }
 
@@ -74,9 +84,9 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
     }
 
     /**
-    No change to initial HP or attack after Warrior is equipped with weapons
-    Follow open-close principle
- */
+     * No change to initial HP or attack after Warrior is equipped with weapons
+     * Follow open-close principle
+     */
 
     @Override
     public int getHP() {
@@ -109,6 +119,10 @@ public class Warrior implements HasAttack, HasHealth, CanReceiveDamage, Cloneabl
 
     @Override
     public void removeWeapons() {
+        for (Weapon weapon : weaponsAvailable) {
+            setInitialHp(getHP() - weapon.getHp());
+            this.attack = getAttack() - weapon.getAttack();
+        }
         weaponsAvailable.clear();
     }
 

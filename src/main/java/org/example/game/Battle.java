@@ -9,7 +9,6 @@ public class Battle {
         do {
             numberOfRounds++;
             attacker.hit(defender);
-            System.out.println(attacker);
             if (defender.isAlive()) {
                 defender.hit(attacker);
             }
@@ -27,13 +26,23 @@ public class Battle {
         var it2 = army2.firstAlive();
 
         while (it1.hasNext() && it2.hasNext()) {
-            bombardiers1.forEach(bombardier -> bombardier.bombard(it2));
-            bombardiers2.forEach(bombardier -> bombardier.bombard(it1));
+            army1.moveUnits();
+            army2.moveUnits();
+
+            bombardiers1.forEach(bombardier -> bombardier.bombard(army2.iterator()));   //with check if alive in bombard()
+            bombardiers2.forEach(bombardier -> bombardier.bombard(army1.iterator()));   //with check if alive in bombard()
 
             army1.moveUnits();
             army2.moveUnits();
 
-            fight(it1.next(), it2.next());
+            /**
+             Due to bomabardier dropping bombs on enemies position before fight need to check if enemy is alive after first wave
+             */
+
+            if (it1.hasNext() && it2.hasNext()) {
+                fight(it1.next(), it2.next());
+            }
+
         }
         return it1.hasNext();
     }
@@ -44,8 +53,12 @@ public class Battle {
             var it1 = army1.iterator();
             var it2 = army2.iterator();
 
-            if(!it1.hasNext()) { return false; }
-            if(!it2.hasNext()) { return true; }
+            if (!it1.hasNext()) {
+                return false;
+            }
+            if (!it2.hasNext()) {
+                return true;
+            }
 
             while (it1.hasNext() && it2.hasNext()) {
                 army1.moveUnits();

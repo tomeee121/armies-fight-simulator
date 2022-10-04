@@ -8,7 +8,7 @@ public class Stealer extends Warrior implements KnowsDamageDealt {
 
     protected Stealer() {
         super(3);
-        setInitialHp(30);
+        setInitialHp(35);
     }
 
 /**
@@ -39,6 +39,11 @@ public class Stealer extends Warrior implements KnowsDamageDealt {
         this.setAttack(getAttack() + weapon.getAttack());
         this.defense = getDefense() + weapon.getDefence();
         addWeaponToList(weapon);
+    }
+
+    @Override
+    public void removeWeapons() {
+        //can not steal from Stealer
     }
 
     int getDefense() {

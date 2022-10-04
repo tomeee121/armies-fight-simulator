@@ -22,6 +22,16 @@ public class Defender extends Warrior {
         addWeaponToList(weapon);
     }
 
+    @Override
+    public void removeWeapons() {
+        for (Weapon weapon : getWeaponsAvailable()) {
+            setInitialHp(getHP() - weapon.getHp());
+            setAttack(getAttack() - weapon.getAttack());
+            this.defense = getDefense() - weapon.getDefence();
+        }
+        getWeaponsAvailable().clear();
+    }
+
     int getDefense() {
         return defense;
     }
