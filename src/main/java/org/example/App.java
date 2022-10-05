@@ -10,29 +10,7 @@ import org.example.game.Warrior;
  *
  */
 public class App {
-    public static void main(String[] args)  {
-//        boolean result = Battle.fight(new Warrior(), new Knight());
-//        String warriorInfo = String.format("Warrior has won in %d rounds", Battle.numberOfRounds);
-//        String knightInfo = String.format("Knight has won in %d rounds", Battle.numberOfRounds);
-//
-//        if (result) {
-//            System.out.println(warriorInfo);
-//        } else {
-//            System.out.println(knightInfo);
-//        }
-//
-//        Army armyFactory = new Army();
-//        Army armyOfKnights = armyFactory.addUnits(new Knight()::clone, 3).addUnits(new Knight()::clone, 3);
-////        List<Warrior> armyOfKnights = armyFactory.getArmy();
-//
-//        Army armyFactory2 = new Army();
-//        Army armyOfWarriors = armyFactory2.addUnits(new Warrior()::clone, 3).addUnits(new Warrior()::clone, 3);
-////        List<Warrior> armyOfWarriors = armyFactory2.getArmy();
-//
-//        boolean resOfBattle = Battle.battle(armyOfKnights, armyOfWarriors);
-//        if (resOfBattle) {
-//            System.out.println("Knights won");
-//        }
+    public static void main(String[] args) {
 
 
 
@@ -83,6 +61,7 @@ public class App {
 //            String format2 = String.format("Yes, I can make that amount of coffee (and even %d more than that)", cupsToMake);
 //            System.out.print(format2);
 //        }
-    }
 
+    }
 }
+

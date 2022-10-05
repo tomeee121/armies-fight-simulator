@@ -26,12 +26,6 @@ public class Warlord extends Warrior {
             unSortedWarriors.add(iterator.next());
         }
 
-//            System.out.println("nie SORTED:");
-        for (Warrior unSortedWarrior : unSortedWarriors) {
-//                System.out.println(unSortedWarrior + "<--- z unsorded list");
-        }
-//            System.out.println(unSortedWarriors.size());
-//            System.out.println("koniec NIE SORTED:");
 
         List<Warrior> firstPosition = helpers.canAddFirstLancer(unSortedWarriors);
         for (Warrior warriorToRemove : firstPosition) {

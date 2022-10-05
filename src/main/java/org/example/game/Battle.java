@@ -32,14 +32,15 @@ public class Battle {
             bombardiers1.forEach(bombardier -> bombardier.bombard(army2.iterator()));   //with check if alive in bombard()
             bombardiers2.forEach(bombardier -> bombardier.bombard(army1.iterator()));   //with check if alive in bombard()
 
-            army1.moveUnits();
-            army2.moveUnits();
 
             /**
              Due to bomabardier dropping bombs on enemies position before fight need to check if enemy is alive after first wave
              */
 
             if (it1.hasNext() && it2.hasNext()) {
+                army1.moveUnits();
+                army2.moveUnits();
+
                 fight(it1.next(), it2.next());
             }
 

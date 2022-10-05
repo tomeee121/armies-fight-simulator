@@ -19,8 +19,6 @@ interface HasHealth {
     default boolean isAlive() {
         return getHP() > 0;
     }
-
-    ;
 }
 
 interface CanReceiveDamage extends HasHealth {
@@ -32,8 +30,6 @@ interface CanReceiveDamage extends HasHealth {
 
     default void heal(CanReceiveDamage allyWarrior) {
     }
-
-    ;
 
     List<Weapon> getWeaponsAvailable();
 

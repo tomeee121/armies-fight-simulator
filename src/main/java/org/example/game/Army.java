@@ -111,7 +111,6 @@ public class Army implements Iterable<Warrior> {
                 if (warlord == null) {
                     addToTail(supply);
                     warlord = (Warlord) supply;
-                    continue;
                 }
             } else {
                 addToTail(supply);
