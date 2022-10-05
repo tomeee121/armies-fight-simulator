@@ -8,6 +8,12 @@ public class Defender extends Warrior {
         setInitialHp(60);
     }
 
+    protected Defender(int attack, int hp, int defense) {
+        super(attack);
+        setInitialHp(hp);
+        this.defense = defense;
+    }
+
     @Override
     public void receiveDamage(HasAttack damager) {
         int finalDamage = Math.max(0, damager.getAttack() - getDefense());
@@ -30,6 +36,10 @@ public class Defender extends Warrior {
             this.defense = getDefense() - weapon.getDefence();
         }
         getWeaponsAvailable().clear();
+    }
+
+    void setDefense(int defense) {
+        this.defense = defense;
     }
 
     int getDefense() {
