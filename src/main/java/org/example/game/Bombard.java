@@ -4,5 +4,5 @@ import java.util.Iterator;
 
 public interface Bombard {
 
-    void bombard(Iterator<Warrior> iterator);
+    void bombard(Warrior opponent);
 }

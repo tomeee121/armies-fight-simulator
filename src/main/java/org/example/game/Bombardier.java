@@ -11,18 +11,16 @@ public class Bombardier extends Warrior implements Bombard {
         setInitialHp(35);
     }
 
-/**
-    Special method for Bombardier so I added it via dedicated interface
-    After ammunition has ended break the while loop for searching opponents
- */
+    /**
+     * Special method for Bombardier so I added it via dedicated interface
+     * After ammunition has ended break the while loop for searching opponents
+     */
 
     @Override
-    public void bombard(Iterator<Warrior> iterator) {
-        while (iterator.hasNext()) {
-            if (isAlive() && bombingsAmount > 0) {
-                this.hit(iterator.next());
-                bombingsAmount--;
-            } else { break; }
+    public void bombard(Warrior opponent) {
+        if (isAlive() && bombingsAmount > 0) {
+            this.hit(opponent);
+            bombingsAmount--;
         }
     }
 

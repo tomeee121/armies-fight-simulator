@@ -19,8 +19,6 @@ public class Battle {
     }
 
     public static boolean battle(Army army1, Army army2) {
-        Iterable<Bombardier> bombardiers1 = army1.getBombardiers();
-        Iterable<Bombardier> bombardiers2 = army2.getBombardiers();
 
         var it1 = army1.firstAlive();
         var it2 = army2.firstAlive();
@@ -29,9 +27,7 @@ public class Battle {
             army1.moveUnits();
             army2.moveUnits();
 
-            bombardiers1.forEach(bombardier -> bombardier.bombard(army2.iterator()));   //with check if alive in bombard()
-            bombardiers2.forEach(bombardier -> bombardier.bombard(army1.iterator()));   //with check if alive in bombard()
-
+            passBombardOrder(army1, army2);
 
             /**
              Due to bomabardier dropping bombs on enemies position before fight need to check if enemy is alive after first wave
@@ -69,6 +65,31 @@ public class Battle {
 
             army1.removeDead();
             army2.removeDead();
+        }
+    }
+
+/**
+    Using two methods to provide compliance with chain of responsibility pattern - first is searching for bombardiers in army
+    then delegate to method executing bombing on enemy army by Bombardier passed to it
+ */
+
+    static void passBombardOrder(Army army1, Army army2) {
+        var command = new Command();
+        var bombardiersArmy1 = command.getBombardiers(army1);
+        var bombardiersArmy2 = command.getBombardiers(army2);
+
+/**
+        Pass every bombardier from first army to command executing bombings on second army
+*/
+
+        for (Bombardier bombardier : bombardiersArmy1) {
+            var commandWithBombardier = new Command(bombardier);
+            commandWithBombardier.bombard(army2);
+        }
+
+        for (Bombardier bombardier : bombardiersArmy2) {
+            var commandWithBombardier = new Command(bombardier);
+            commandWithBombardier.bombard(army1);
         }
     }
 
